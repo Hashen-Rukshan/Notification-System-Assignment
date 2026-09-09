@@ -1,12 +1,12 @@
 ﻿using System;
 
-// Product Interface
+
 public interface INotification
 {
     void Send(string message);
 }
 
-// Concrete Products
+
 public class EmailNotification : INotification
 {
     public void Send(string message)
@@ -30,20 +30,22 @@ public class PushNotification : INotification
         Console.WriteLine($"Sending Push Notification: {message}");
     }
 }
-// Abstract Creator
+
+
 public abstract class NotificationFactory
 {
-    // The Factory Method
+
     public abstract INotification CreateNotification();
 
-    // Core logic that relies on the factory method
+    
     public void Notify(string message)
     {
         INotification notification = CreateNotification();
         notification.Send(message);
     }
 }
-// Concrete Creators
+
+
 public class EmailFactory : NotificationFactory
 {
     public override INotification CreateNotification()
@@ -67,13 +69,13 @@ public class PushFactory : NotificationFactory
         return new PushNotification();
     }
 }
+
 class Program
 {
     static void Main(string[] args)
     {
-        // 1. Client creates a specific factory
+        
         NotificationFactory emailFactory = new EmailFactory();
-        // 2. Client calls the core method, which dynamically instantiates the EmailNotification
         emailFactory.Notify("Your system has been updated.");
 
         NotificationFactory smsFactory = new SMSFactory();
